@@ -3,7 +3,7 @@ import { Text, Container, List, ListItem, Content } from "native-base";
 
 const routes = ["Home", "BlankPage"];
 export interface Props {
-	navigation: any,
+	navigation: any;
 }
 export interface State {}
 export default class Sidebar extends React.Component<Props, State> {

@@ -4,7 +4,7 @@
 		"slug": "Native-starter-Kit",
 		"loading": {
 			"hideExponentText": false,
-			"icon": "./src/assets/loading.png"
+			"icon": "./assets/loading.png"
 		},
 		"orientation": "portrait",
 		"primaryColor": "#cccccc",

@@ -13,7 +13,7 @@ class Login extends React.Component<Props, State> {
 			<Container>
 				<View style={styles.container}>
 					<Content>
-						<Image source={require("../../../assets/shadow.png")} style={styles.shadow}>
+						<Image source={require("../../../../assets/shadow.png")} style={styles.shadow}>
 							<View style={styles.bg}>
 								{this.props.loginForm}
 								<Button style={styles.btn} onPress={() => this.props.onLogin()}>
