@@ -1,0 +1,32 @@
+
+
+
+
+
+
+
+
+
+
+
+'use strict';
+
+var PropTypes=require('prop-types');
+
+var createStrictShapeTypeChecker=require('createStrictShapeTypeChecker');
+
+var EdgeInsetsPropType=createStrictShapeTypeChecker({
+top:PropTypes.number,
+left:PropTypes.number,
+bottom:PropTypes.number,
+right:PropTypes.number});
+
+
+
+
+
+
+
+
+
+module.exports=EdgeInsetsPropType;

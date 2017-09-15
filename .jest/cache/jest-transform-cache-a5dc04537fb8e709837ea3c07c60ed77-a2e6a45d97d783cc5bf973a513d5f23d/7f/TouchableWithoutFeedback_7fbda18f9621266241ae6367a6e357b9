@@ -1,0 +1,199 @@
+
+
+
+
+
+
+
+
+
+
+
+'use strict';
+
+var EdgeInsetsPropType=require('EdgeInsetsPropType');
+var React=require('React');
+var PropTypes=require('prop-types');
+var TimerMixin=require('react-timer-mixin');
+var Touchable=require('Touchable');
+
+var createReactClass=require('create-react-class');
+var ensurePositiveDelayProps=require('ensurePositiveDelayProps');
+var warning=require('fbjs/lib/warning');var _require=
+
+
+
+
+require('ViewAccessibility'),AccessibilityComponentTypes=_require.AccessibilityComponentTypes,AccessibilityTraits=_require.AccessibilityTraits;
+
+
+
+var PRESS_RETENTION_OFFSET={top:20,left:20,right:20,bottom:30};
+
+
+
+
+
+
+
+
+
+var TouchableWithoutFeedback=createReactClass({
+displayName:'TouchableWithoutFeedback',
+mixins:[TimerMixin,Touchable.Mixin],
+
+propTypes:{
+accessible:PropTypes.bool,
+accessibilityComponentType:PropTypes.oneOf(
+AccessibilityComponentTypes),
+
+accessibilityTraits:PropTypes.oneOfType([
+PropTypes.oneOf(AccessibilityTraits),
+PropTypes.arrayOf(PropTypes.oneOf(AccessibilityTraits))]),
+
+
+
+
+disabled:PropTypes.bool,
+
+
+
+
+onPress:PropTypes.func,
+onPressIn:PropTypes.func,
+onPressOut:PropTypes.func,
+
+
+
+
+
+onLayout:PropTypes.func,
+
+onLongPress:PropTypes.func,
+
+
+
+
+delayPressIn:PropTypes.number,
+
+
+
+delayPressOut:PropTypes.number,
+
+
+
+delayLongPress:PropTypes.number,
+
+
+
+
+
+
+
+pressRetentionOffset:EdgeInsetsPropType,
+
+
+
+
+
+
+
+
+hitSlop:EdgeInsetsPropType},
+
+
+getInitialState:function getInitialState(){
+return this.touchableGetInitialState();
+},
+
+componentDidMount:function componentDidMount(){
+ensurePositiveDelayProps(this.props);
+},
+
+componentWillReceiveProps:function componentWillReceiveProps(nextProps){
+ensurePositiveDelayProps(nextProps);
+},
+
+
+
+
+
+touchableHandlePress:function touchableHandlePress(e){
+this.props.onPress&&this.props.onPress(e);
+},
+
+touchableHandleActivePressIn:function touchableHandleActivePressIn(e){
+this.props.onPressIn&&this.props.onPressIn(e);
+},
+
+touchableHandleActivePressOut:function touchableHandleActivePressOut(e){
+this.props.onPressOut&&this.props.onPressOut(e);
+},
+
+touchableHandleLongPress:function touchableHandleLongPress(e){
+this.props.onLongPress&&this.props.onLongPress(e);
+},
+
+touchableGetPressRectOffset:function touchableGetPressRectOffset(){
+return this.props.pressRetentionOffset||PRESS_RETENTION_OFFSET;
+},
+
+touchableGetHitSlop:function touchableGetHitSlop(){
+return this.props.hitSlop;
+},
+
+touchableGetHighlightDelayMS:function touchableGetHighlightDelayMS(){
+return this.props.delayPressIn||0;
+},
+
+touchableGetLongPressDelayMS:function touchableGetLongPressDelayMS(){
+return this.props.delayLongPress===0?0:
+this.props.delayLongPress||500;
+},
+
+touchableGetPressOutDelayMS:function touchableGetPressOutDelayMS(){
+return this.props.delayPressOut||0;
+},
+
+render:function render(){
+
+
+var child=React.Children.only(this.props.children);
+var children=child.props.children;
+warning(
+!child.type||child.type.displayName!=='Text',
+'TouchableWithoutFeedback does not work well with Text children. Wrap children in a View instead. See '+(
+child._owner&&child._owner.getName&&child._owner.getName()||'<unknown>'));
+
+if(Touchable.TOUCH_TARGET_DEBUG&&child.type&&child.type.displayName==='View'){
+children=React.Children.toArray(children);
+children.push(Touchable.renderDebugView({color:'red',hitSlop:this.props.hitSlop}));
+}
+var style=Touchable.TOUCH_TARGET_DEBUG&&child.type&&child.type.displayName==='Text'?
+[child.props.style,{color:'red'}]:
+child.props.style;
+return React.cloneElement(child,{
+accessible:this.props.accessible!==false,
+
+accessibilityLabel:this.props.accessibilityLabel,
+accessibilityComponentType:this.props.accessibilityComponentType,
+accessibilityTraits:this.props.accessibilityTraits,
+
+nativeID:this.props.nativeID,
+
+testID:this.props.testID,
+onLayout:this.props.onLayout,
+hitSlop:this.props.hitSlop,
+onStartShouldSetResponder:this.touchableHandleStartShouldSetResponder,
+onResponderTerminationRequest:this.touchableHandleResponderTerminationRequest,
+onResponderGrant:this.touchableHandleResponderGrant,
+onResponderMove:this.touchableHandleResponderMove,
+onResponderRelease:this.touchableHandleResponderRelease,
+onResponderTerminate:this.touchableHandleResponderTerminate,
+style:style,
+children:children});
+
+}});
+
+
+module.exports=TouchableWithoutFeedback;

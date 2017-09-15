@@ -1,0 +1,143 @@
+
+
+
+
+
+
+
+
+
+
+
+'use strict';
+
+var NativeMethodsMixin=require('NativeMethodsMixin');
+var Platform=require('Platform');
+var PropTypes=require('prop-types');
+var React=require('React');
+var ReactNativeStyleAttributes=require('ReactNativeStyleAttributes');
+var ReactNativeViewAttributes=require('ReactNativeViewAttributes');
+var ViewPropTypes=require('ViewPropTypes');
+
+var createReactClass=require('create-react-class');
+var invariant=require('fbjs/lib/invariant');
+var requireNativeComponent=require('requireNativeComponent');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var View=createReactClass({
+displayName:'View',
+
+
+
+
+mixins:[NativeMethodsMixin],
+
+
+
+
+
+propTypes:ViewPropTypes,
+
+
+
+
+
+viewConfig:{
+uiViewClassName:'RCTView',
+validAttributes:ReactNativeViewAttributes.RCTView},
+
+
+contextTypes:{
+isInAParentText:PropTypes.bool},
+
+
+render:function render(){
+invariant(
+!(this.context.isInAParentText&&Platform.OS==='android'),
+'Nesting of <View> within <Text> is not supported on Android.');
+
+
+
+
+
+return React.createElement(RCTView,this.props);
+}});
+
+
+var RCTView=requireNativeComponent('RCTView',View,{
+nativeOnly:{
+nativeBackgroundAndroid:true,
+nativeForegroundAndroid:true}});
+
+
+
+if(__DEV__){
+var UIManager=require('UIManager');
+var viewConfig=UIManager.viewConfigs&&UIManager.viewConfigs.RCTView||{};
+for(var prop in viewConfig.nativeProps){
+var viewAny=View;
+if(!viewAny.propTypes[prop]&&!ReactNativeStyleAttributes[prop]){
+throw new Error(
+'View is missing propType for native prop `'+prop+'`');
+
+}
+}
+}
+
+var ViewToExport=RCTView;
+if(__DEV__){
+ViewToExport=View;
+}
+
+
+module.exports=ViewToExport;

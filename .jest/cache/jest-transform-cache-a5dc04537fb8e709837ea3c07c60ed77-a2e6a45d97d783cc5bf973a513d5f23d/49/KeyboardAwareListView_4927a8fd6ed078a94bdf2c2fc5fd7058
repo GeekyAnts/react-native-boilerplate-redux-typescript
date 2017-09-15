@@ -1,0 +1,48 @@
+Object.defineProperty(exports,"__esModule",{value:true});var _extends=Object.assign||function(target){for(var i=1;i<arguments.length;i++){var source=arguments[i];for(var key in source){if(Object.prototype.hasOwnProperty.call(source,key)){target[key]=source[key];}}}return target;};
+
+var _react=require('react');var _react2=_interopRequireDefault(_react);
+var _createReactClass=require('create-react-class');var _createReactClass2=_interopRequireDefault(_createReactClass);
+var _reactNative=require('react-native');
+var _propTypes=require('prop-types');var _propTypes2=_interopRequireDefault(_propTypes);
+var _KeyboardAwareMixin=require('./KeyboardAwareMixin');var _KeyboardAwareMixin2=_interopRequireDefault(_KeyboardAwareMixin);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}
+
+var KeyboardAwareListView=(0,_createReactClass2.default)({displayName:'KeyboardAwareListView',
+propTypes:{
+viewIsInsideTabBar:_propTypes2.default.bool,
+resetScrollToCoords:_propTypes2.default.shape({
+x:_propTypes2.default.number.isRequired,
+y:_propTypes2.default.number.isRequired}),
+
+onScroll:_propTypes2.default.func},
+
+mixins:[_KeyboardAwareMixin2.default],
+
+componentWillMount:function componentWillMount(){
+this.setViewIsInsideTabBar(!!this.props.viewIsInsideTabBar);
+if(this.props.resetScrollToCoords){
+this.setResetScrollToCoords(this.props.resetScrollToCoords);
+}
+},
+
+onScroll:function onScroll(e){
+this.handleOnScroll(e);
+this.props.onScroll&&this.props.onScroll(e);
+},
+
+render:function render(){
+return(
+_react2.default.createElement(_reactNative.ListView,_extends({
+ref:'_rnkasv_keyboardView',
+keyboardDismissMode:'interactive',
+contentInset:{bottom:this.state.keyboardSpace},
+automaticallyAdjustContentInsets:false,
+showsVerticalScrollIndicator:true,
+scrollEventThrottle:0},
+this.props,{
+onScroll:this.onScroll})));
+
+
+}});exports.default=
+
+
+KeyboardAwareListView;

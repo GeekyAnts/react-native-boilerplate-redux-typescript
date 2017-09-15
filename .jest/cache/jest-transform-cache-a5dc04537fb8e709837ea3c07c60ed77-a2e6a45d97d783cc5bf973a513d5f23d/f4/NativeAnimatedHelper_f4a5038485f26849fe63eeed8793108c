@@ -1,0 +1,191 @@
+
+
+
+
+
+
+
+
+
+
+
+'use strict';
+
+var NativeAnimatedModule=require('NativeModules').NativeAnimatedModule;
+var NativeEventEmitter=require('NativeEventEmitter');
+
+var invariant=require('fbjs/lib/invariant');
+
+var __nativeAnimatedNodeTagCount=1;
+var __nativeAnimationIdCount=1;
+
+
+
+
+
+
+
+
+var nativeEventEmitter=void 0;
+
+
+
+
+
+var API={
+createAnimatedNode:function createAnimatedNode(tag,config){
+assertNativeAnimatedModule();
+NativeAnimatedModule.createAnimatedNode(tag,config);
+},
+startListeningToAnimatedNodeValue:function startListeningToAnimatedNodeValue(tag){
+assertNativeAnimatedModule();
+NativeAnimatedModule.startListeningToAnimatedNodeValue(tag);
+},
+stopListeningToAnimatedNodeValue:function stopListeningToAnimatedNodeValue(tag){
+assertNativeAnimatedModule();
+NativeAnimatedModule.stopListeningToAnimatedNodeValue(tag);
+},
+connectAnimatedNodes:function connectAnimatedNodes(parentTag,childTag){
+assertNativeAnimatedModule();
+NativeAnimatedModule.connectAnimatedNodes(parentTag,childTag);
+},
+disconnectAnimatedNodes:function disconnectAnimatedNodes(parentTag,childTag){
+assertNativeAnimatedModule();
+NativeAnimatedModule.disconnectAnimatedNodes(parentTag,childTag);
+},
+startAnimatingNode:function startAnimatingNode(animationId,nodeTag,config,endCallback){
+assertNativeAnimatedModule();
+NativeAnimatedModule.startAnimatingNode(animationId,nodeTag,config,endCallback);
+},
+stopAnimation:function stopAnimation(animationId){
+assertNativeAnimatedModule();
+NativeAnimatedModule.stopAnimation(animationId);
+},
+setAnimatedNodeValue:function setAnimatedNodeValue(nodeTag,value){
+assertNativeAnimatedModule();
+NativeAnimatedModule.setAnimatedNodeValue(nodeTag,value);
+},
+setAnimatedNodeOffset:function setAnimatedNodeOffset(nodeTag,offset){
+assertNativeAnimatedModule();
+NativeAnimatedModule.setAnimatedNodeOffset(nodeTag,offset);
+},
+flattenAnimatedNodeOffset:function flattenAnimatedNodeOffset(nodeTag){
+assertNativeAnimatedModule();
+NativeAnimatedModule.flattenAnimatedNodeOffset(nodeTag);
+},
+extractAnimatedNodeOffset:function extractAnimatedNodeOffset(nodeTag){
+assertNativeAnimatedModule();
+NativeAnimatedModule.extractAnimatedNodeOffset(nodeTag);
+},
+connectAnimatedNodeToView:function connectAnimatedNodeToView(nodeTag,viewTag){
+assertNativeAnimatedModule();
+NativeAnimatedModule.connectAnimatedNodeToView(nodeTag,viewTag);
+},
+disconnectAnimatedNodeFromView:function disconnectAnimatedNodeFromView(nodeTag,viewTag){
+assertNativeAnimatedModule();
+NativeAnimatedModule.disconnectAnimatedNodeFromView(nodeTag,viewTag);
+},
+dropAnimatedNode:function dropAnimatedNode(tag){
+assertNativeAnimatedModule();
+NativeAnimatedModule.dropAnimatedNode(tag);
+},
+addAnimatedEventToView:function addAnimatedEventToView(viewTag,eventName,eventMapping){
+assertNativeAnimatedModule();
+NativeAnimatedModule.addAnimatedEventToView(viewTag,eventName,eventMapping);
+},
+removeAnimatedEventFromView:function removeAnimatedEventFromView(viewTag,eventName,animatedNodeTag){
+assertNativeAnimatedModule();
+NativeAnimatedModule.removeAnimatedEventFromView(viewTag,eventName,animatedNodeTag);
+}};
+
+
+
+
+
+
+
+
+var STYLES_WHITELIST={
+opacity:true,
+transform:true,
+
+scaleX:true,
+scaleY:true,
+translateX:true,
+translateY:true};
+
+
+var TRANSFORM_WHITELIST={
+translateX:true,
+translateY:true,
+scale:true,
+scaleX:true,
+scaleY:true,
+rotate:true,
+rotateX:true,
+rotateY:true,
+perspective:true};
+
+
+function validateTransform(configs){
+configs.forEach(function(config){
+if(!TRANSFORM_WHITELIST.hasOwnProperty(config.property)){
+throw new Error('Property \''+config.property+'\' is not supported by native animated module');
+}
+});
+}
+
+function validateStyles(styles){
+for(var key in styles){
+if(!STYLES_WHITELIST.hasOwnProperty(key)){
+throw new Error('Style property \''+key+'\' is not supported by native animated module');
+}
+}
+}
+
+function validateInterpolation(config){
+var SUPPORTED_INTERPOLATION_PARAMS={
+inputRange:true,
+outputRange:true,
+extrapolate:true,
+extrapolateRight:true,
+extrapolateLeft:true};
+
+for(var key in config){
+if(!SUPPORTED_INTERPOLATION_PARAMS.hasOwnProperty(key)){
+throw new Error('Interpolation property \''+key+'\' is not supported by native animated module');
+}
+}
+}
+
+function generateNewNodeTag(){
+return __nativeAnimatedNodeTagCount++;
+}
+
+function generateNewAnimationId(){
+return __nativeAnimationIdCount++;
+}
+
+function assertNativeAnimatedModule(){
+invariant(NativeAnimatedModule,'Native animated module is not available');
+}
+
+function isNativeAnimatedAvailable(){
+return!!NativeAnimatedModule;
+}
+
+module.exports={
+API:API,
+validateStyles:validateStyles,
+validateTransform:validateTransform,
+validateInterpolation:validateInterpolation,
+generateNewNodeTag:generateNewNodeTag,
+generateNewAnimationId:generateNewAnimationId,
+assertNativeAnimatedModule:assertNativeAnimatedModule,
+isNativeAnimatedAvailable:isNativeAnimatedAvailable,
+get nativeEventEmitter(){
+if(!nativeEventEmitter){
+nativeEventEmitter=new NativeEventEmitter(NativeAnimatedModule);
+}
+return nativeEventEmitter;
+}};

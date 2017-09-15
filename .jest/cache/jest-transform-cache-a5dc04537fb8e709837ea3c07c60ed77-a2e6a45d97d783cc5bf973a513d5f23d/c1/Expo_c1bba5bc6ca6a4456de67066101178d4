@@ -1,0 +1,191 @@
+var _extends=Object.assign||function(target){for(var i=1;i<arguments.length;i++){var source=arguments[i];for(var key in source){if(Object.prototype.hasOwnProperty.call(source,key)){target[key]=source[key];}}}return target;};
+
+require('./Logs');
+require('./Location');
+
+var _reactNative=require('react-native');
+var _Constants=require('./Constants');var _Constants2=_interopRequireDefault(_Constants);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}
+
+if(typeof _Constants2.default.manifest.env==='object'){
+_extends(process.env,_Constants2.default.manifest.env);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+module.exports={
+
+get Crypto(){
+return _reactNative.NativeModules.ExponentCrypto;
+},
+get ErrorRecovery(){
+return _reactNative.NativeModules.ExponentErrorRecovery;
+},
+get Fabric(){
+return _reactNative.NativeModules.ExponentFabric;
+},
+get ImageCropper(){
+return _reactNative.NativeModules.ExponentImageCropper;
+},
+
+
+get apisAreAvailable(){
+return require('./apisAreAvailable').default;
+},
+get registerRootComponent(){
+return require('./registerRootComponent').default;
+},
+get takeSnapshotAsync(){
+return require('./takeSnapshotAsync').default;
+},
+get Asset(){
+return require('./Asset').default;
+},
+get Accelerometer(){
+return require('./sensor/Accelerometer').default;
+},
+get GLView(){
+return require('./GLView').default;
+},
+get Gyroscope(){
+return require('./sensor/Gyroscope').default;
+},
+get Magnetometer(){
+return require('./sensor/Magnetometer').default;
+},
+get MagnetometerUncalibrated(){
+return require('./sensor/MagnetometerUncalibrated').default;
+},
+get Notifications(){
+return require('./Notifications').default;
+},
+get SQLite(){
+return require('./SQLite').default;
+},
+
+
+get AppLoading(){
+return require('./AppLoading').default;
+},
+get BarCodeScanner(){
+return require('./BarCodeScanner').default;
+},
+get BlurView(){
+return require('./BlurView').default;
+},
+get Camera(){
+return require('./Camera').default;
+},
+get KeepAwake(){
+return require('./KeepAwake').default;
+},
+get LinearGradient(){
+return require('./LinearGradient').default;
+},
+get MapView(){
+return require('react-native-maps');
+},
+get Modal(){
+return require('./Modal/Modal').default;
+},
+get Video(){
+return require('./Video').default;
+},
+get WebBrowser(){
+return require('./WebBrowser');
+},
+get Svg(){
+return require('./Svg').default;
+},
+get Fingerprint(){
+return require('./Fingerprint');
+},
+
+
+get Amplitude(){
+return require('./Amplitude');
+},
+get Audio(){
+return require('./Audio');
+},
+get Constants(){
+return require('./Constants').default;
+},
+get Contacts(){
+return require('./Contacts');
+},
+get DangerZone(){
+return require('./DangerZone');
+},
+get DocumentPicker(){
+return require('./DocumentPicker');
+},
+get FileSystem(){
+return require('./FileSystem');
+},
+get Font(){
+return require('./Font');
+},
+get Google(){
+return require('./Google');
+},
+get Icon(){
+return require('./Icon').default;
+},
+get ImagePicker(){
+return require('./ImagePicker');
+},
+get Location(){
+return require('./Location').default;
+},
+get Logs(){
+return require('./Logs');
+},
+get Pedometer(){
+return require('./Pedometer');
+},
+get Permissions(){
+return require('./Permissions');
+},
+get Facebook(){
+return require('./Facebook');
+},
+get FacebookAds(){
+return require('./FacebookAds');
+},
+get LegacyAsyncStorage(){
+return require('./LegacyAsyncStorage');
+},
+get IntentLauncherAndroid(){
+return require('./IntentLauncherAndroid');
+},
+get ScreenOrientation(){
+return require('./ScreenOrientation');
+},
+get SecureStore(){
+return require('./SecureStore');
+},
+get Segment(){
+return require('./Segment');
+},
+get Speech(){
+return require('./Speech');
+},
+get Util(){
+return require('./Util');
+}};
+
+
+if(global){
+global.__exponent=module.exports;
+global.__expo=module.exports;
+global.Expo=module.exports;
+}

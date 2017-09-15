@@ -1,0 +1,10 @@
+'use strict';require('ts-jest').install();"use strict";var _react = require("react");var _react2 = _interopRequireDefault(_react);
+var _index = require("../index");var _index2 = _interopRequireDefault(_index);
+
+var _reactTestRenderer = require("react-test-renderer");var _reactTestRenderer2 = _interopRequireDefault(_reactTestRenderer);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+const navigation = { state: jest.fn() }; // Note: test renderer must be required after react-native.
+it("renders correctly", () => {
+    const tree = _reactTestRenderer2.default.create(_react2.default.createElement(_index2.default, { navigation: navigation })).toJSON();
+    expect(tree).toMatchSnapshot();
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXgudGVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImluZGV4LnRlc3QudHN4Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJhQUFBLEFBQU8sQUFBSyxBQUFNLEFBQU8sQUFBQztBQUMxQixBQUFPLEFBQVMsQUFBTSxBQUFVLEFBQUM7O0FBRWpDLEFBQU8sQUFBUSxBQUFNLEFBQXFCLEFBQUM7QUFFM0MsTUFBTSxBQUFVLGFBQUcsRUFBRSxBQUFLLE9BQUUsQUFBSSxLQUFDLEFBQUUsQUFBRSxBQUFFLEFBQUMsUUFIeEMsQUFBMkQ7QUFLM0QsQUFBRSxHQUFDLEFBQW1CLHFCQUFFO0FBQ3ZCLFVBQU0sQUFBSSxPQUFHLEFBQVEsNEJBQUMsQUFBTSxPQUFDLGdCQUFDLEFBQVMsaUNBQUMsQUFBVSxZQUFFLEFBQVUsQUFBSSxBQUFDLGVBQUMsQUFBTSxBQUFFLEFBQUM7QUFDN0UsQUFBTSxXQUFDLEFBQUksQUFBQyxNQUFDLEFBQWUsQUFBRSxBQUFDLEFBQ2hDO0FBQUMsQUFBQyxBQUFDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFJlYWN0IGZyb20gXCJyZWFjdFwiO1xuaW1wb3J0IEJsYW5rUGFnZSBmcm9tIFwiLi4vaW5kZXhcIjtcbi8vIE5vdGU6IHRlc3QgcmVuZGVyZXIgbXVzdCBiZSByZXF1aXJlZCBhZnRlciByZWFjdC1uYXRpdmUuXG5pbXBvcnQgcmVuZGVyZXIgZnJvbSBcInJlYWN0LXRlc3QtcmVuZGVyZXJcIjtcblxuY29uc3QgbmF2aWdhdGlvbiA9IHsgc3RhdGU6IGplc3QuZm4oKSB9O1xuXG5pdChcInJlbmRlcnMgY29ycmVjdGx5XCIsICgpID0+IHtcblx0Y29uc3QgdHJlZSA9IHJlbmRlcmVyLmNyZWF0ZSg8QmxhbmtQYWdlIG5hdmlnYXRpb249e25hdmlnYXRpb259IC8+KS50b0pTT04oKTtcblx0ZXhwZWN0KHRyZWUpLnRvTWF0Y2hTbmFwc2hvdCgpO1xufSk7XG4iXX0=

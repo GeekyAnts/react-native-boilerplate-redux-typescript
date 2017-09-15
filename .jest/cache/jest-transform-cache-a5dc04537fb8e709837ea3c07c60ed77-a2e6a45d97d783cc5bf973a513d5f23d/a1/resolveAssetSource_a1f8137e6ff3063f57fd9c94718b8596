@@ -1,0 +1,92 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+'use strict';
+
+var AssetRegistry=require('AssetRegistry');
+var AssetSourceResolver=require('AssetSourceResolver');
+var NativeModules=require('NativeModules');
+
+
+
+var _customSourceTransformer=void 0,_serverURL=void 0,_bundleSourcePath=void 0;
+
+function getDevServerURL(){
+if(_serverURL===undefined){
+var scriptURL=NativeModules.SourceCode.scriptURL;
+var match=scriptURL&&scriptURL.match(/^https?:\/\/.*?\//);
+if(match){
+
+_serverURL=match[0];
+}else{
+
+_serverURL=null;
+}
+}
+return _serverURL;
+}
+
+function getBundleSourcePath(){
+if(_bundleSourcePath===undefined){
+var scriptURL=NativeModules.SourceCode.scriptURL;
+if(!scriptURL){
+
+_bundleSourcePath=null;
+return _bundleSourcePath;
+}
+if(scriptURL.startsWith('assets://')){
+
+_bundleSourcePath=null;
+return _bundleSourcePath;
+}
+if(scriptURL.startsWith('file://')){
+
+_bundleSourcePath=scriptURL.substring(7,scriptURL.lastIndexOf('/')+1);
+}else{
+_bundleSourcePath=scriptURL.substring(0,scriptURL.lastIndexOf('/')+1);
+}
+}
+
+return _bundleSourcePath;
+}
+
+function setCustomSourceTransformer(
+transformer)
+{
+_customSourceTransformer=transformer;
+}
+
+
+
+
+
+function resolveAssetSource(source){
+if(typeof source==='object'){
+return source;
+}
+
+var asset=AssetRegistry.getAssetByID(source);
+if(!asset){
+return null;
+}
+
+var resolver=new AssetSourceResolver(getDevServerURL(),getBundleSourcePath(),asset);
+if(_customSourceTransformer){
+return _customSourceTransformer(resolver);
+}
+return resolver.defaultAsset();
+}
+
+module.exports=resolveAssetSource;
+module.exports.pickScale=AssetSourceResolver.pickScale;
+module.exports.setCustomSourceTransformer=setCustomSourceTransformer;

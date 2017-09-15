@@ -1,0 +1,18 @@
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _react = require("react");var React = _interopRequireWildcard(_react);
+var _reactNative = require("react-native");
+var _nativeBase = require("native-base");
+var _styles = require("./styles");var _styles2 = _interopRequireDefault(_styles);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}
+class Login extends React.Component {
+    render() {
+        return React.createElement(_nativeBase.Container, null,
+        React.createElement(_nativeBase.View, { style: _styles2.default.container },
+        React.createElement(_nativeBase.Content, null,
+        React.createElement(_reactNative.Image, { source: require("../../../../assets/shadow.png"), style: _styles2.default.shadow },
+        React.createElement(_nativeBase.View, { style: _styles2.default.bg },
+        this.props.loginForm,
+        React.createElement(_nativeBase.Button, { style: _styles2.default.btn, onPress: () => this.props.onLogin() },
+        React.createElement(_nativeBase.Text, null, "Login")))))));
+    }}exports.default =
+
+Login;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50c3giXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjJFQUFBLEFBQU8sa0NBQUssQUFBSyxBQUFNLEFBQU8sQUFBQztBQUMvQixBQUFPLEFBQUUsQUFBSyxBQUFFLEFBQU0sQUFBYyxBQUFDO0FBQ3JDLEFBQU8sQUFBRSxBQUFTLEFBQUUsQUFBTyxBQUFFLEFBQU0sQUFBRSxBQUFJLEFBQUUsQUFBSSxBQUFFLEFBQU0sQUFBYSxBQUFDO0FBQ3JFLEFBQU8sQUFBTSxBQUFNLEFBQVUsQUFBQztBQU05QixNQUFZLGNBQVEsQUFBSyxNQUFDLEFBQXVCO0FBQ2hELEFBQU07QUFDTCxBQUFNLEFBQUMsZUFDTixNQUFDLEFBQVM7QUFDVCxjQUFDLEFBQUksa0NBQUMsQUFBSyxPQUFFLEFBQU0saUJBQUMsQUFBUztBQUM1QixjQUFDLEFBQU87QUFDUCxjQUFDLEFBQUssb0NBQUMsQUFBTSxRQUFFLEFBQU8sUUFBQyxBQUErQixBQUFDLGtDQUFFLEFBQUssT0FBRSxBQUFNLGlCQUFDLEFBQU07QUFDNUUsY0FBQyxBQUFJLGtDQUFDLEFBQUssT0FBRSxBQUFNLGlCQUFDLEFBQUU7QUFDcEIsQUFBSSxhQUFDLEFBQUssTUFBQyxBQUFTO0FBQ3JCLGNBQUMsQUFBTSxvQ0FBQyxBQUFLLE9BQUUsQUFBTSxpQkFBQyxBQUFHLEtBQUUsQUFBTyxTQUFFLE1BQU0sQUFBSSxLQUFDLEFBQUssTUFBQyxBQUFPLEFBQUU7QUFDN0QsY0FBQyxBQUFJLHNDQUFhLEFBQ1YsQUFDSCxBQUNBLEFBQ0MsQUFDSixBQUNJLEFBQ1osQUFBQyxBQUNIO0FBQUMsQUFDRCxBQUVEOztBQUFlLEFBQUssQUFBQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCAqIGFzIFJlYWN0IGZyb20gXCJyZWFjdFwiO1xuaW1wb3J0IHsgSW1hZ2UgfSBmcm9tIFwicmVhY3QtbmF0aXZlXCI7XG5pbXBvcnQgeyBDb250YWluZXIsIENvbnRlbnQsIEJ1dHRvbiwgVmlldywgVGV4dCB9IGZyb20gXCJuYXRpdmUtYmFzZVwiO1xuaW1wb3J0IHN0eWxlcyBmcm9tIFwiLi9zdHlsZXNcIjtcbmV4cG9ydCBpbnRlcmZhY2UgUHJvcHMge1xuXHRsb2dpbkZvcm06IGFueTtcblx0b25Mb2dpbjogRnVuY3Rpb247XG59XG5leHBvcnQgaW50ZXJmYWNlIFN0YXRlIHt9XG5jbGFzcyBMb2dpbiBleHRlbmRzIFJlYWN0LkNvbXBvbmVudDxQcm9wcywgU3RhdGU+IHtcblx0cmVuZGVyKCkge1xuXHRcdHJldHVybiAoXG5cdFx0XHQ8Q29udGFpbmVyPlxuXHRcdFx0XHQ8VmlldyBzdHlsZT17c3R5bGVzLmNvbnRhaW5lcn0+XG5cdFx0XHRcdFx0PENvbnRlbnQ+XG5cdFx0XHRcdFx0XHQ8SW1hZ2Ugc291cmNlPXtyZXF1aXJlKFwiLi4vLi4vLi4vLi4vYXNzZXRzL3NoYWRvdy5wbmdcIil9IHN0eWxlPXtzdHlsZXMuc2hhZG93fT5cblx0XHRcdFx0XHRcdFx0PFZpZXcgc3R5bGU9e3N0eWxlcy5iZ30+XG5cdFx0XHRcdFx0XHRcdFx0e3RoaXMucHJvcHMubG9naW5Gb3JtfVxuXHRcdFx0XHRcdFx0XHRcdDxCdXR0b24gc3R5bGU9e3N0eWxlcy5idG59IG9uUHJlc3M9eygpID0+IHRoaXMucHJvcHMub25Mb2dpbigpfT5cblx0XHRcdFx0XHRcdFx0XHRcdDxUZXh0PkxvZ2luPC9UZXh0PlxuXHRcdFx0XHRcdFx0XHRcdDwvQnV0dG9uPlxuXHRcdFx0XHRcdFx0XHQ8L1ZpZXc+XG5cdFx0XHRcdFx0XHQ8L0ltYWdlPlxuXHRcdFx0XHRcdDwvQ29udGVudD5cblx0XHRcdFx0PC9WaWV3PlxuXHRcdFx0PC9Db250YWluZXI+XG5cdFx0KTtcblx0fVxufVxuXG5leHBvcnQgZGVmYXVsdCBMb2dpbjtcbiJdfQ==

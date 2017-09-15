@@ -1,0 +1,54 @@
+
+
+
+
+
+
+
+
+
+
+
+'use strict';var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}
+
+var EmitterSubscription=require('EmitterSubscription');
+var EventEmitter=require('EventEmitter');
+
+var invariant=require('fbjs/lib/invariant');var
+
+MissingNativeEventEmitterShim=function(_EventEmitter){_inherits(MissingNativeEventEmitterShim,_EventEmitter);
+
+
+
+
+function MissingNativeEventEmitterShim(nativeModuleName,nativeEventEmitterName){_classCallCheck(this,MissingNativeEventEmitterShim);var _this=_possibleConstructorReturn(this,(MissingNativeEventEmitterShim.__proto__||Object.getPrototypeOf(MissingNativeEventEmitterShim)).call(this,
+null));_this.isAvailable=false;
+_this._nativeModuleName=nativeModuleName;
+_this._nativeEventEmitterName=nativeEventEmitterName;return _this;
+}_createClass(MissingNativeEventEmitterShim,[{key:'throwMissingNativeModule',value:function throwMissingNativeModule()
+
+{
+invariant(
+false,
+'Cannot use \''+this._nativeEventEmitterName+'\' module when '+('native \''+
+this._nativeModuleName+'\' is not included in the build. ')+('Either include it, or check \''+
+this._nativeEventEmitterName+'\'.isAvailable ')+
+'before calling any methods.');
+
+}},{key:'addListener',value:function addListener(
+
+
+eventType,listener,context){
+this.throwMissingNativeModule();
+}},{key:'removeAllListeners',value:function removeAllListeners(
+
+eventType){
+this.throwMissingNativeModule();
+}},{key:'removeSubscription',value:function removeSubscription(
+
+subscription){
+this.throwMissingNativeModule();
+}}]);return MissingNativeEventEmitterShim;}(EventEmitter);
+
+
+module.exports=MissingNativeEventEmitterShim;

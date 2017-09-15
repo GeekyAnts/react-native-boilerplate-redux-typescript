@@ -1,5 +1,5 @@
 const initialState = {
-	list: ["React Native Starter Kit", "React Navigation", "NativeBase Easy Grid", "NativeBase", "CodePush", "Redux"],
+	list: [],
 	isLoading: true,
 };
 

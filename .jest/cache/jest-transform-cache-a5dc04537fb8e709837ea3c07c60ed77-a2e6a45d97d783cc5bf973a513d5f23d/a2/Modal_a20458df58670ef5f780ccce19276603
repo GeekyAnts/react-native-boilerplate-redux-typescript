@@ -1,0 +1,242 @@
+
+
+
+
+
+
+
+
+
+
+
+'use strict';var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _class,_temp,_container;function _defineProperty(obj,key,value){if(key in obj){Object.defineProperty(obj,key,{value:value,enumerable:true,configurable:true,writable:true});}else{obj[key]=value;}return obj;}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}
+
+var AppContainer=require('AppContainer');
+var I18nManager=require('I18nManager');
+var Platform=require('Platform');
+var React=require('React');
+var PropTypes=require('prop-types');
+var StyleSheet=require('StyleSheet');
+var View=require('View');
+
+var deprecatedPropType=require('deprecatedPropType');
+var requireNativeComponent=require('requireNativeComponent');
+var RCTModalHostView=requireNativeComponent('RCTModalHostView',null);var
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Modal=(_temp=_class=function(_React$Component){_inherits(Modal,_React$Component);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function Modal(props){_classCallCheck(this,Modal);var _this=_possibleConstructorReturn(this,(Modal.__proto__||Object.getPrototypeOf(Modal)).call(this,
+props));
+Modal._confirmProps(props);return _this;
+}_createClass(Modal,[{key:'componentWillReceiveProps',value:function componentWillReceiveProps(
+
+nextProps){
+Modal._confirmProps(nextProps);
+}},{key:'render',value:function render()
+
+
+
+
+
+
+
+{
+if(this.props.visible===false){
+return null;
+}
+
+var containerStyles={
+backgroundColor:this.props.transparent?'transparent':'white'};
+
+
+var animationType=this.props.animationType;
+if(!animationType){
+
+animationType='none';
+if(this.props.animated){
+animationType='slide';
+}
+}
+
+var presentationStyle=this.props.presentationStyle;
+if(!presentationStyle){
+presentationStyle='fullScreen';
+if(this.props.transparent){
+presentationStyle='overFullScreen';
+}
+}
+
+var innerChildren=__DEV__?
+React.createElement(AppContainer,{rootTag:this.context.rootTag},
+this.props.children):
+
+this.props.children;
+
+return(
+React.createElement(RCTModalHostView,{
+animationType:animationType,
+presentationStyle:presentationStyle,
+transparent:this.props.transparent,
+hardwareAccelerated:this.props.hardwareAccelerated,
+onRequestClose:this.props.onRequestClose,
+onShow:this.props.onShow,
+style:styles.modal,
+onStartShouldSetResponder:this._shouldSetResponder,
+supportedOrientations:this.props.supportedOrientations,
+onOrientationChange:this.props.onOrientationChange},
+
+React.createElement(View,{style:[styles.container,containerStyles]},
+innerChildren)));
+
+
+
+}},{key:'_shouldSetResponder',value:function _shouldSetResponder()
+
+
+{
+return true;
+}}],[{key:'_confirmProps',value:function _confirmProps(props){if(props.presentationStyle&&props.presentationStyle!=='overFullScreen'&&props.transparent){console.warn('Modal with \''+props.presentationStyle+'\' presentation style and \'transparent\' value is not supported.');}}}]);return Modal;}(React.Component),_class.propTypes={animationType:PropTypes.oneOf(['none','slide','fade']),presentationStyle:PropTypes.oneOf(['fullScreen','pageSheet','formSheet','overFullScreen']),transparent:PropTypes.bool,hardwareAccelerated:PropTypes.bool,visible:PropTypes.bool,onRequestClose:Platform.OS==='android'?PropTypes.func.isRequired:PropTypes.func,onShow:PropTypes.func,animated:deprecatedPropType(PropTypes.bool,'Use the `animationType` prop instead.'),supportedOrientations:PropTypes.arrayOf(PropTypes.oneOf(['portrait','portrait-upside-down','landscape','landscape-left','landscape-right'])),onOrientationChange:PropTypes.func},_class.defaultProps={visible:true,hardwareAccelerated:false},_class.contextTypes={rootTag:PropTypes.number},_temp);
+
+
+var side=I18nManager.isRTL?'right':'left';
+var styles=StyleSheet.create({
+modal:{
+position:'absolute'},
+
+container:(_container={
+position:'absolute'},_defineProperty(_container,
+side,0),_defineProperty(_container,'top',
+0),_container)});
+
+
+
+module.exports=Modal;

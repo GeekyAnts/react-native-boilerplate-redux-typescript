@@ -1,0 +1,38 @@
+
+
+
+
+
+
+
+
+
+
+
+'use strict';
+
+var UIManager=require('UIManager');
+
+
+
+
+function deprecatedPropType(
+propType,
+explanation)
+{
+return function validate(props,propName,componentName){
+
+if(!UIManager[componentName]&&props[propName]!==undefined){
+console.warn('`'+propName+'` supplied to `'+componentName+'` has been deprecated. '+explanation);
+}for(var _len=arguments.length,rest=Array(_len>3?_len-3:0),_key=3;_key<_len;_key++){rest[_key-3]=arguments[_key];}
+
+return propType.apply(undefined,[
+props,
+propName,
+componentName].concat(
+rest));
+
+};
+}
+
+module.exports=deprecatedPropType;

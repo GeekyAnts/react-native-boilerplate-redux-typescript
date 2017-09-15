@@ -1,0 +1,30 @@
+
+
+
+
+
+
+
+
+
+
+
+'use strict';
+
+var ReactNativeFeatureFlags=require('ReactNativeFeatureFlags');
+
+
+
+var ReactNative=void 0;
+
+if(__DEV__){
+ReactNative=ReactNativeFeatureFlags.useFiber?
+require('ReactNativeFiber-dev'):
+require('ReactNativeStack-dev');
+}else{
+ReactNative=ReactNativeFeatureFlags.useFiber?
+require('ReactNativeFiber-prod'):
+require('ReactNativeStack-prod');
+}
+
+module.exports=ReactNative;

@@ -1,0 +1,11 @@
+'use strict';require('ts-jest').install();"use strict";require("react-native");
+var _react = require("react");var _react2 = _interopRequireDefault(_react);
+var _index = require("../index");var _index2 = _interopRequireDefault(_index);
+
+var _reactTestRenderer = require("react-test-renderer");var _reactTestRenderer2 = _interopRequireDefault(_reactTestRenderer);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+const navigation = { state: jest.fn() }; // Note: test renderer must be required after react-native.
+it("renders correctly", () => {
+    const tree = _reactTestRenderer2.default.create(_react2.default.createElement(_index2.default, { navigation: navigation })).toJSON();
+    expect(tree).toMatchSnapshot();
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXgudGVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImluZGV4LnRlc3QudHN4Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJhQUFBLEFBQU8sQUFBYyxBQUFDO0FBQ3RCLEFBQU8sQUFBSyxBQUFNLEFBQU8sQUFBQztBQUMxQixBQUFPLEFBQVMsQUFBTSxBQUFVLEFBQUM7O0FBRWpDLEFBQU8sQUFBUSxBQUFNLEFBQXFCLEFBQUM7QUFFM0MsTUFBTSxBQUFVLGFBQUcsRUFBRSxBQUFLLE9BQUUsQUFBSSxLQUFDLEFBQUUsQUFBRSxBQUFFLEFBQUMsUUFIeEMsQUFBMkQ7QUFLM0QsQUFBRSxHQUFDLEFBQW1CLHFCQUFFO0FBQ3ZCLFVBQU0sQUFBSSxPQUFHLEFBQVEsNEJBQUMsQUFBTSxPQUFDLGdCQUFDLEFBQVMsaUNBQUMsQUFBVSxZQUFFLEFBQVUsQUFBSSxBQUFDLGVBQUMsQUFBTSxBQUFFLEFBQUM7QUFDN0UsQUFBTSxXQUFDLEFBQUksQUFBQyxNQUFDLEFBQWUsQUFBRSxBQUFDLEFBQ2hDO0FBQUMsQUFBQyxBQUFDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFwicmVhY3QtbmF0aXZlXCI7XG5pbXBvcnQgUmVhY3QgZnJvbSBcInJlYWN0XCI7XG5pbXBvcnQgQmxhbmtQYWdlIGZyb20gXCIuLi9pbmRleFwiO1xuLy8gTm90ZTogdGVzdCByZW5kZXJlciBtdXN0IGJlIHJlcXVpcmVkIGFmdGVyIHJlYWN0LW5hdGl2ZS5cbmltcG9ydCByZW5kZXJlciBmcm9tIFwicmVhY3QtdGVzdC1yZW5kZXJlclwiO1xuXG5jb25zdCBuYXZpZ2F0aW9uID0geyBzdGF0ZTogamVzdC5mbigpIH07XG5cbml0KFwicmVuZGVycyBjb3JyZWN0bHlcIiwgKCkgPT4ge1xuXHRjb25zdCB0cmVlID0gcmVuZGVyZXIuY3JlYXRlKDxCbGFua1BhZ2UgbmF2aWdhdGlvbj17bmF2aWdhdGlvbn0gLz4pLnRvSlNPTigpO1xuXHRleHBlY3QodHJlZSkudG9NYXRjaFNuYXBzaG90KCk7XG59KTtcbiJdfQ==

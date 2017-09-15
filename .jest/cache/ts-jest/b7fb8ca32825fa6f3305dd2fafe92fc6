@@ -1,0 +1,8 @@
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _reactNative = require("react-native");
+const styles = _reactNative.StyleSheet.create({
+    container: {
+        backgroundColor: "#FBFAFA" } });exports.default =
+
+
+styles;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3R5bGVzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3R5bGVzLnRzeCJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiMkVBQUEsQUFBTyxBQUFFLEFBQVUsQUFBRSxBQUFNLEFBQWMsQUFBQztBQUUxQyxNQUFNLEFBQU0sU0FBUSxBQUFVLHdCQUFDLEFBQU07QUFDcEMsQUFBUyxlQUFFO0FBQ1YsQUFBZSx5QkFBRSxBQUFTLEFBQzFCLEFBQ0QsQUFBQyxBQUFDLEFBQ0gsV0FMc0M7OztBQUt2QixBQUFNLEFBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBTdHlsZVNoZWV0IH0gZnJvbSBcInJlYWN0LW5hdGl2ZVwiO1xuXG5jb25zdCBzdHlsZXM6IGFueSA9IFN0eWxlU2hlZXQuY3JlYXRlKHtcblx0Y29udGFpbmVyOiB7XG5cdFx0YmFja2dyb3VuZENvbG9yOiBcIiNGQkZBRkFcIixcblx0fSxcbn0pO1xuZXhwb3J0IGRlZmF1bHQgc3R5bGVzO1xuIl19

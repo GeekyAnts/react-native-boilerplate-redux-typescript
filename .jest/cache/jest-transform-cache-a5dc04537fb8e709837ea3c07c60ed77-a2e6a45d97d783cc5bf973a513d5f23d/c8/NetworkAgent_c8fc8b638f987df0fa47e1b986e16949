@@ -1,0 +1,300 @@
+
+
+
+
+
+
+
+
+
+
+
+'use strict';var _class2,_temp;var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}
+
+var InspectorAgent=require('InspectorAgent');
+var JSInspector=require('JSInspector');
+var Map=require('Map');
+var XMLHttpRequest=require('XMLHttpRequest');var
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Interceptor=function(){
+
+
+
+function Interceptor(agent){_classCallCheck(this,Interceptor);
+this._agent=agent;
+this._requests=new Map();
+}_createClass(Interceptor,[{key:'getData',value:function getData(
+
+requestId){
+return this._requests.get(requestId);
+}},{key:'requestSent',value:function requestSent(
+
+
+id,
+url,
+method,
+headers){
+var requestId=String(id);
+this._requests.set(requestId,'');
+
+var request={
+url:url,
+method:method,
+headers:headers,
+initialPriority:'Medium'};
+
+var event={
+requestId:requestId,
+documentURL:'',
+frameId:'1',
+loaderId:'1',
+request:request,
+timestamp:JSInspector.getTimestamp(),
+initiator:{
+
+
+
+type:'other'},
+
+type:'Other'};
+
+this._agent.sendEvent('requestWillBeSent',event);
+}},{key:'responseReceived',value:function responseReceived(
+
+
+id,
+url,
+status,
+headers){
+var requestId=String(id);
+var response={
+url:url,
+status:status,
+statusText:String(status),
+headers:headers,
+
+requestHeaders:{},
+mimeType:this._getMimeType(headers),
+connectionReused:false,
+connectionId:-1,
+encodedDataLength:0,
+securityState:'unknown'};
+
+
+var event={
+requestId:requestId,
+frameId:'1',
+loaderId:'1',
+timestamp:JSInspector.getTimestamp(),
+type:'Other',
+response:response};
+
+this._agent.sendEvent('responseReceived',event);
+}},{key:'dataReceived',value:function dataReceived(
+
+
+id,
+data){
+var requestId=String(id);
+var existingData=this._requests.get(requestId)||'';
+this._requests.set(requestId,existingData.concat(data));
+var event={
+requestId:requestId,
+timestamp:JSInspector.getTimestamp(),
+dataLength:data.length,
+encodedDataLength:data.length};
+
+this._agent.sendEvent('dataReceived',event);
+}},{key:'loadingFinished',value:function loadingFinished(
+
+
+id,
+encodedDataLength){
+var event={
+requestId:String(id),
+timestamp:JSInspector.getTimestamp(),
+encodedDataLength:encodedDataLength};
+
+this._agent.sendEvent('loadingFinished',event);
+}},{key:'loadingFailed',value:function loadingFailed(
+
+
+id,
+error){
+var event={
+requestId:String(id),
+timestamp:JSInspector.getTimestamp(),
+type:'Other',
+errorText:error};
+
+this._agent.sendEvent('loadingFailed',event);
+}},{key:'_getMimeType',value:function _getMimeType(
+
+headers){
+var contentType=headers['Content-Type']||'';
+return contentType.split(';')[0];
+}}]);return Interceptor;}();var
+
+
+
+
+
+
+
+NetworkAgent=(_temp=_class2=function(_InspectorAgent){_inherits(NetworkAgent,_InspectorAgent);function NetworkAgent(){_classCallCheck(this,NetworkAgent);return _possibleConstructorReturn(this,(NetworkAgent.__proto__||Object.getPrototypeOf(NetworkAgent)).apply(this,arguments));}_createClass(NetworkAgent,[{key:'enable',value:function enable(_ref)
+
+
+
+
+
+{var maxResourceBufferSize=_ref.maxResourceBufferSize,maxTotalBufferSize=_ref.maxTotalBufferSize;
+this._interceptor=new Interceptor(this);
+XMLHttpRequest.setInterceptor(this._interceptor);
+}},{key:'disable',value:function disable()
+
+{
+XMLHttpRequest.setInterceptor(null);
+this._interceptor=null;
+}},{key:'getResponseBody',value:function getResponseBody(_ref2)
+
+
+{var requestId=_ref2.requestId;
+return{body:this.interceptor().getData(requestId),base64Encoded:false};
+}},{key:'interceptor',value:function interceptor()
+
+{
+if(this._interceptor){
+return this._interceptor;
+}else{
+throw Error('_interceptor can not be null');
+}
+
+}}]);return NetworkAgent;}(InspectorAgent),_class2.DOMAIN='Network',_temp);
+
+
+module.exports=NetworkAgent;

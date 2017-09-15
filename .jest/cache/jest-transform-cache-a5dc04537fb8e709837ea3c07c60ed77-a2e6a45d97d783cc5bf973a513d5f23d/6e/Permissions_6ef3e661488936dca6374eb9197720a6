@@ -1,0 +1,45 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.CONTACTS=exports.NOTIFICATIONS=exports.REMOTE_NOTIFICATIONS=exports.LOCATION=exports.AUDIO_RECORDING=exports.CAMERA=undefined;exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+getAsync=getAsync;exports.
+
+
+
+
+
+askAsync=askAsync;var _reactNative=require('react-native');var regeneratorRuntime=require('regenerator-runtime');var Permissions=_reactNative.NativeModules.ExponentPermissions;function getAsync(type){return regeneratorRuntime.async(function getAsync$(_context){while(1){switch(_context.prev=_context.next){case 0:return _context.abrupt('return',Permissions.getAsync(type));case 1:case'end':return _context.stop();}}},null,this);}function askAsync(
+type){return regeneratorRuntime.async(function askAsync$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:return _context2.abrupt('return',
+
+Permissions.askAsync(type));case 1:case'end':return _context2.stop();}}},null,this);}
+
+
+var CAMERA=exports.CAMERA='camera';
+var AUDIO_RECORDING=exports.AUDIO_RECORDING='audioRecording';
+var LOCATION=exports.LOCATION='location';
+var REMOTE_NOTIFICATIONS=exports.REMOTE_NOTIFICATIONS='remoteNotifications';
+var NOTIFICATIONS=exports.NOTIFICATIONS=REMOTE_NOTIFICATIONS;
+var CONTACTS=exports.CONTACTS='contacts';

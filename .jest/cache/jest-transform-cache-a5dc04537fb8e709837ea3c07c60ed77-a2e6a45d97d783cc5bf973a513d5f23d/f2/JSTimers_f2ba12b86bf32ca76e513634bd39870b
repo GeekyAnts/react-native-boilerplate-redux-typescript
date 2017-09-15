@@ -1,0 +1,481 @@
+
+
+
+
+
+
+
+
+
+
+
+
+'use strict';
+
+var Platform=require('Platform');
+var Systrace=require('Systrace');
+
+var invariant=require('fbjs/lib/invariant');
+var performanceNow=require('fbjs/lib/performanceNow');
+var warning=require('fbjs/lib/warning');var _require=
+
+require('NativeModules'),Timing=_require.Timing;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var FRAME_DURATION=1000/60;
+var IDLE_CALLBACK_FRAME_DEADLINE=1;
+
+var MAX_TIMER_DURATION_MS=60*1000;
+var IS_ANDROID=Platform.OS==='android';
+var ANDROID_LONG_TIMER_MESSAGE=
+'Setting a timer for a long period of time, i.e. multiple minutes, is a '+
+'performance and correctness issue on Android as it keeps the timer '+
+'module awake, and timers can only be called when the app is in the foreground. '+
+'See https://github.com/facebook/react-native/issues/12981 for more info.';
+
+
+var callbacks=[];
+var types=[];
+var timerIDs=[];
+var immediates=[];
+var requestIdleCallbacks=[];
+var requestIdleCallbackTimeouts={};
+var identifiers=[];
+
+var GUID=1;
+var errors=null;
+
+var hasEmittedTimeDriftWarning=false;
+
+
+function _getFreeIndex(){
+var freeIndex=timerIDs.indexOf(null);
+if(freeIndex===-1){
+freeIndex=timerIDs.length;
+}
+return freeIndex;
+}
+
+function _allocateCallback(func,type){
+var id=GUID++;
+var freeIndex=_getFreeIndex();
+timerIDs[freeIndex]=id;
+callbacks[freeIndex]=func;
+types[freeIndex]=type;
+if(__DEV__){
+var parseErrorStack=require('parseErrorStack');
+var error=new Error();
+error.framesToPop=1;
+var stack=parseErrorStack(error);
+if(stack){
+identifiers[freeIndex]=stack.shift();
+}
+}
+return id;
+}
+
+
+
+
+
+
+function _callTimer(timerID,frameTime,didTimeout){
+warning(
+timerID<=GUID,
+'Tried to call timer with ID %s but no such timer exists.',
+timerID);
+
+
+
+
+
+
+
+var timerIndex=timerIDs.indexOf(timerID);
+if(timerIndex===-1){
+return;
+}
+
+var type=types[timerIndex];
+var callback=callbacks[timerIndex];
+if(!callback||!type){
+console.error('No callback found for timerID '+timerID);
+return;
+}
+
+if(__DEV__){
+var identifier=identifiers[timerIndex]||{};
+Systrace.beginEvent('Systrace.callTimer: '+identifier.methodName);
+}
+
+
+if(
+type==='setTimeout'||
+type==='setImmediate'||
+type==='requestAnimationFrame'||
+type==='requestIdleCallback')
+{
+_clearIndex(timerIndex);
+}
+
+try{
+if(
+type==='setTimeout'||
+type==='setInterval'||
+type==='setImmediate')
+{
+callback();
+}else if(type==='requestAnimationFrame'){
+callback(performanceNow());
+}else if(type==='requestIdleCallback'){
+callback({
+timeRemaining:function timeRemaining(){
+
+
+
+return Math.max(0,FRAME_DURATION-(performanceNow()-frameTime));
+},
+didTimeout:!!didTimeout});
+
+}else{
+console.error('Tried to call a callback with invalid type: '+type);
+}
+}catch(e){
+
+if(!errors){
+errors=[e];
+}else{
+errors.push(e);
+}
+}
+
+if(__DEV__){
+Systrace.endEvent();
+}
+}
+
+function _clearIndex(i){
+timerIDs[i]=null;
+callbacks[i]=null;
+types[i]=null;
+identifiers[i]=null;
+}
+
+function _freeCallback(timerID){
+
+
+if(timerID==null){
+return;
+}
+
+var index=timerIDs.indexOf(timerID);
+
+if(index!==-1){
+_clearIndex(index);
+var type=types[index];
+if(type!=='setImmediate'&&type!=='requestIdleCallback'){
+Timing.deleteTimer(timerID);
+}
+}
+}
+
+
+
+
+
+
+var JSTimers={
+
+
+
+
+setTimeout:function setTimeout(
+func,
+duration)
+
+{for(var _len=arguments.length,args=Array(_len>2?_len-2:0),_key=2;_key<_len;_key++){args[_key-2]=arguments[_key];}
+if(__DEV__&&IS_ANDROID&&duration>MAX_TIMER_DURATION_MS){
+console.warn(
+ANDROID_LONG_TIMER_MESSAGE+
+'\n'+
+'(Saw setTimeout with duration '+
+duration+
+'ms)');
+
+}
+var id=_allocateCallback(
+function(){return func.apply(undefined,args);},
+'setTimeout');
+
+Timing.createTimer(id,duration||0,Date.now(),false);
+return id;
+},
+
+
+
+
+
+setInterval:function setInterval(
+func,
+duration)
+
+{for(var _len2=arguments.length,args=Array(_len2>2?_len2-2:0),_key2=2;_key2<_len2;_key2++){args[_key2-2]=arguments[_key2];}
+if(__DEV__&&IS_ANDROID&&duration>MAX_TIMER_DURATION_MS){
+console.warn(
+ANDROID_LONG_TIMER_MESSAGE+
+'\n'+
+'(Saw setInterval with duration '+
+duration+
+'ms)');
+
+}
+var id=_allocateCallback(
+function(){return func.apply(undefined,args);},
+'setInterval');
+
+Timing.createTimer(id,duration||0,Date.now(),true);
+return id;
+},
+
+
+
+
+
+setImmediate:function setImmediate(func){for(var _len3=arguments.length,args=Array(_len3>1?_len3-1:0),_key3=1;_key3<_len3;_key3++){args[_key3-1]=arguments[_key3];}
+var id=_allocateCallback(
+function(){return func.apply(undefined,args);},
+'setImmediate');
+
+immediates.push(id);
+return id;
+},
+
+
+
+
+requestAnimationFrame:function requestAnimationFrame(func){
+var id=_allocateCallback(func,'requestAnimationFrame');
+Timing.createTimer(id,1,Date.now(),false);
+return id;
+},
+
+
+
+
+
+
+requestIdleCallback:function requestIdleCallback(func,options){
+if(requestIdleCallbacks.length===0){
+Timing.setSendIdleEvents(true);
+}
+
+var timeout=options&&options.timeout;
+var id=_allocateCallback(
+timeout!=null?
+function(deadline){
+var timeoutId=requestIdleCallbackTimeouts[id];
+if(timeoutId){
+JSTimers.clearTimeout(timeoutId);
+requestIdleCallbackTimeouts[id];
+}
+return func(deadline);
+}:
+func,
+'requestIdleCallback');
+
+requestIdleCallbacks.push(id);
+
+if(timeout!=null){
+var timeoutId=JSTimers.setTimeout(function(){
+var index=requestIdleCallbacks.indexOf(id);
+if(index>-1){
+requestIdleCallbacks.splice(index,1);
+_callTimer(id,performanceNow(),true);
+}
+delete requestIdleCallbackTimeouts[id];
+if(requestIdleCallbacks.length===0){
+Timing.setSendIdleEvents(false);
+}
+},timeout);
+requestIdleCallbackTimeouts[id]=timeoutId;
+}
+return id;
+},
+
+cancelIdleCallback:function cancelIdleCallback(timerID){
+_freeCallback(timerID);
+var index=requestIdleCallbacks.indexOf(timerID);
+if(index!==-1){
+requestIdleCallbacks.splice(index,1);
+}
+
+var timeoutId=requestIdleCallbackTimeouts[timerID];
+if(timeoutId){
+JSTimers.clearTimeout(timeoutId);
+delete requestIdleCallbackTimeouts[timerID];
+}
+
+if(requestIdleCallbacks.length===0){
+Timing.setSendIdleEvents(false);
+}
+},
+
+clearTimeout:function clearTimeout(timerID){
+_freeCallback(timerID);
+},
+
+clearInterval:function clearInterval(timerID){
+_freeCallback(timerID);
+},
+
+clearImmediate:function clearImmediate(timerID){
+_freeCallback(timerID);
+var index=immediates.indexOf(timerID);
+if(index!==-1){
+immediates.splice(index,1);
+}
+},
+
+cancelAnimationFrame:function cancelAnimationFrame(timerID){
+_freeCallback(timerID);
+},
+
+
+
+
+
+callTimers:function callTimers(timersToCall){
+invariant(
+timersToCall.length!==0,
+'Cannot call `callTimers` with an empty list of IDs.');
+
+
+
+errors=null;
+for(var i=0;i<timersToCall.length;i++){
+_callTimer(timersToCall[i],0);
+}
+
+if(errors){
+var errorCount=errors.length;
+if(errorCount>1){
+
+
+for(var ii=1;ii<errorCount;ii++){
+JSTimers.setTimeout(
+function(error){
+throw error;
+}.bind(null,errors[ii]),
+0);
+
+}
+}
+throw errors[0];
+}
+},
+
+callIdleCallbacks:function callIdleCallbacks(frameTime){
+if(
+FRAME_DURATION-(performanceNow()-frameTime)<
+IDLE_CALLBACK_FRAME_DEADLINE)
+{
+return;
+}
+
+
+errors=null;
+if(requestIdleCallbacks.length>0){
+var passIdleCallbacks=requestIdleCallbacks.slice();
+requestIdleCallbacks=[];
+
+for(var i=0;i<passIdleCallbacks.length;++i){
+_callTimer(passIdleCallbacks[i],frameTime);
+}
+}
+
+if(requestIdleCallbacks.length===0){
+Timing.setSendIdleEvents(false);
+}
+
+if(errors){
+errors.forEach(function(error){return(
+JSTimers.setTimeout(function(){
+throw error;
+},0));});
+
+}
+},
+
+
+
+
+
+callImmediatesPass:function callImmediatesPass(){
+if(__DEV__){
+Systrace.beginEvent('callImmediatesPass()');
+}
+
+
+
+if(immediates.length>0){
+var passImmediates=immediates.slice();
+immediates=[];
+
+
+
+for(var i=0;i<passImmediates.length;++i){
+_callTimer(passImmediates[i],0);
+}
+}
+
+if(__DEV__){
+Systrace.endEvent();
+}
+return immediates.length>0;
+},
+
+
+
+
+
+callImmediates:function callImmediates(){
+errors=null;
+while(JSTimers.callImmediatesPass()){}
+if(errors){
+errors.forEach(function(error){return(
+JSTimers.setTimeout(function(){
+throw error;
+},0));});
+
+}
+},
+
+
+
+
+emitTimeDriftWarning:function emitTimeDriftWarning(warningMessage){
+if(hasEmittedTimeDriftWarning){
+return;
+}
+hasEmittedTimeDriftWarning=true;
+console.warn(warningMessage);
+}};
+
+
+module.exports=JSTimers;

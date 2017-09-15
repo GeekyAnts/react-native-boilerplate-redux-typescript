@@ -1,0 +1,144 @@
+
+
+
+
+
+
+
+
+
+
+
+'use strict';var _extends=Object.assign||function(target){for(var i=1;i<arguments.length;i++){var source=arguments[i];for(var key in source){if(Object.prototype.hasOwnProperty.call(source,key)){target[key]=source[key];}}}return target;};function _objectWithoutProperties(obj,keys){var target={};for(var i in obj){if(keys.indexOf(i)>=0)continue;if(!Object.prototype.hasOwnProperty.call(obj,i))continue;target[i]=obj[i];}return target;}
+
+var ColorPropType=require('ColorPropType');
+var NativeMethodsMixin=require('NativeMethodsMixin');
+var Platform=require('Platform');
+var React=require('React');
+var PropTypes=require('prop-types');
+var StyleSheet=require('StyleSheet');
+var View=require('View');
+var ViewPropTypes=require('ViewPropTypes');
+
+var createReactClass=require('create-react-class');
+var requireNativeComponent=require('requireNativeComponent');
+
+var GRAY='#999999';
+
+
+
+
+
+
+
+
+
+
+
+
+
+var ActivityIndicator=createReactClass({
+displayName:'ActivityIndicator',
+mixins:[NativeMethodsMixin],
+
+propTypes:_extends({},
+ViewPropTypes,{
+
+
+
+animating:PropTypes.bool,
+
+
+
+color:ColorPropType,
+
+
+
+
+size:PropTypes.oneOfType([
+PropTypes.oneOf(['small','large']),
+PropTypes.number]),
+
+
+
+
+
+
+hidesWhenStopped:PropTypes.bool}),
+
+
+getDefaultProps:function getDefaultProps(){
+return{
+animating:true,
+color:Platform.OS==='ios'?GRAY:undefined,
+hidesWhenStopped:true,
+size:'small'};
+
+},
+
+render:function render(){var _props=
+this.props,onLayout=_props.onLayout,style=_props.style,props=_objectWithoutProperties(_props,['onLayout','style']);
+var sizeStyle=void 0;
+
+switch(props.size){
+case'small':
+sizeStyle=styles.sizeSmall;
+break;
+case'large':
+sizeStyle=styles.sizeLarge;
+break;
+default:
+sizeStyle={height:props.size,width:props.size};
+break;}
+
+
+return(
+React.createElement(View,{
+onLayout:onLayout,
+style:[styles.container,style]},
+React.createElement(RCTActivityIndicator,_extends({},
+props,{
+style:sizeStyle,
+styleAttr:'Normal',
+indeterminate:true}))));
+
+
+
+}});
+
+
+var styles=StyleSheet.create({
+container:{
+alignItems:'center',
+justifyContent:'center'},
+
+sizeSmall:{
+width:20,
+height:20},
+
+sizeLarge:{
+width:36,
+height:36}});
+
+
+
+if(Platform.OS==='ios'){
+var RCTActivityIndicator=requireNativeComponent(
+'RCTActivityIndicatorView',
+ActivityIndicator,
+{nativeOnly:{activityIndicatorViewStyle:true}});
+
+}else if(Platform.OS==='android'){
+var RCTActivityIndicator=requireNativeComponent(
+'AndroidProgressBar',
+ActivityIndicator,
+
+{nativeOnly:{
+indeterminate:true,
+progress:true,
+styleAttr:true}});
+
+
+}
+
+module.exports=ActivityIndicator;

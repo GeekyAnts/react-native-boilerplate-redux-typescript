@@ -1,0 +1,8 @@
+Object.defineProperty(exports,"__esModule",{value:true});var _MaterialCommunityIcons=require('./vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json');var _MaterialCommunityIcons2=_interopRequireDefault(_MaterialCommunityIcons);
+
+var _createIconSet=require('./createIconSet');var _createIconSet2=_interopRequireDefault(_createIconSet);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}exports.default=
+
+(0,_createIconSet2.default)(_MaterialCommunityIcons2.default,
+
+'material-community',
+require('./fonts/MaterialCommunityIcons.ttf'));
