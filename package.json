@@ -27,7 +27,7 @@
 	"scripts": {
 		"start": "npm run build && concurrently -r 'npm run watch' 'react-native-scripts start'",
 		"eject": "react-native-scripts eject",
-		"test": "tslint src/**/*.ts && eslint .",
+		"test": "jest && tslint src/**/*.ts && eslint .",
 		"watch": "npm run build -- -w",
 		"ios": "npm run build && concurrently -r 'npm run watch' 'react-native-scripts ios'",
 		"android": "npm run build && concurrently -r 'npm run watch' 'react-native-scripts android'",
