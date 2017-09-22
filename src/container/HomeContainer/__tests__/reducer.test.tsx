@@ -10,17 +10,23 @@ describe("list reducer", () => {
 
 	it("should handle FETCH_LIST_SUCCESS", () => {
 		expect(
-			reducer([], {
-				type: "FETCH_LIST_SUCCESS",
-				list: [
-					"React Native Starter Kit",
-					"React Navigation",
-					"NativeBase Easy Grid",
-					"NativeBase",
-					"CodePush",
-					"Redux",
-				],
-			})
+			reducer(
+				{
+					list: [],
+					isLoading: true,
+				},
+				{
+					type: "FETCH_LIST_SUCCESS",
+					list: [
+						"React Native Starter Kit",
+						"React Navigation",
+						"NativeBase Easy Grid",
+						"NativeBase",
+						"CodePush",
+						"Redux",
+					],
+				}
+			)
 		).toEqual({
 			list: [
 				"React Native Starter Kit",
@@ -30,15 +36,23 @@ describe("list reducer", () => {
 				"CodePush",
 				"Redux",
 			],
+			isLoading: true,
 		});
 	});
 	it("should handle LIST_IS_LOADING", () => {
 		expect(
-			reducer([], {
-				type: "LIST_IS_LOADING",
-				isLoading: false,
-			})
+			reducer(
+				{
+					list: [],
+					isLoading: false,
+				},
+				{
+					type: "LIST_IS_LOADING",
+					isLoading: false,
+				}
+			)
 		).toEqual({
+			list: [],
 			isLoading: false,
 		});
 	});
