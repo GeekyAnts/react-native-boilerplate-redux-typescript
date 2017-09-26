@@ -1,7 +1,7 @@
 {
 	"expo": {
 		"sdkVersion": "20.0.0",
-		"slug": "Native-starter-Kit",
+		"slug": "React-Native-Seed",
 		"loading": {
 			"hideExponentText": false,
 			"icon": "./assets/loading.png"
