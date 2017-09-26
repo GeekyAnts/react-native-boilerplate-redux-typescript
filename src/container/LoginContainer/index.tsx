@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Item, Input, Icon, View, Text, Toast } from "native-base";
+import { Item, Input, Icon, Form, Toast } from "native-base";
 import { Field, reduxForm } from "redux-form";
 import Login from "../../stories/screens/Login";
 
@@ -22,27 +22,15 @@ class LoginForm extends React.Component<Props, State> {
 
 	renderInput({ input, meta: { touched, error } }) {
 		return (
-			<View>
-				<Item error={error && touched}>
-					<Icon active name={input.name === "email" ? "person" : "unlock"} />
-					<Input
-						ref={c => (this.textInput = c)}
-						placeholder={input.name === "email" ? "EMAIL" : "PASSWORD"}
-						secureTextEntry={input.name === "password" ? true : false}
-						{...input}
-					/>
-					{touched && error ? (
-						<Icon active onPress={() => this.textInput._root.clear()} name="close" />
-					) : (
-						<Text />
-					)}
-				</Item>
-				{touched && error ? (
-					<Text style={{ color: "red", fontSize: 13, textAlign: "right" }}>{error}</Text>
-				) : (
-					<Text style={{ color: "transparent", fontSize: 13, textAlign: "right" }}>error here</Text>
-				)}
-			</View>
+			<Item error={error && touched}>
+				<Icon active name={input.name === "email" ? "person" : "unlock"} />
+				<Input
+					ref={c => (this.textInput = c)}
+					placeholder={input.name === "email" ? "EMAIL" : "PASSWORD"}
+					secureTextEntry={input.name === "password" ? true : false}
+					{...input}
+				/>
+			</Item>
 		);
 	}
 
@@ -61,14 +49,14 @@ class LoginForm extends React.Component<Props, State> {
 
 	render() {
 		const form = (
-			<View>
+			<Form>
 				<Field name="email" component={this.renderInput} validate={[email, required]} />
 				<Field
 					name="password"
 					component={this.renderInput}
 					validate={[alphaNumeric, minLength8, maxLength15, required]}
 				/>
-			</View>
+			</Form>
 		);
 		return <Login loginForm={form} onLogin={() => this.login()} />;
 	}

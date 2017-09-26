@@ -47,13 +47,23 @@ exports[`renders correctly 1`] = `
         closeOnScroll={true}
         dataArray={
           Array [
-            "Home",
-            "BlankPage",
+            Object {
+              "caption": "Home",
+              "route": "Home",
+            },
+            Object {
+              "caption": "Blank Page",
+              "route": "BlankPage",
+            },
+            Object {
+              "caption": "Logout",
+              "route": "Login",
+            },
           ]
         }
         dataSource={
           ListViewDataSource {
-            "items": 2,
+            "items": 3,
           }
         }
         directionalDistanceChangeThreshold={2}
@@ -204,7 +214,72 @@ exports[`renders correctly 1`] = `
                 uppercase={false}
                 virtual={undefined}
               >
-                BlankPage
+                Blank Page
+              </Text>
+            </View>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                },
+                undefined,
+              ]
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <View
+              button={true}
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff",
+                  "borderBottomWidth": 0.5,
+                  "borderColor": "#c9c9c9",
+                  "flexDirection": "row",
+                  "marginLeft": 15,
+                  "paddingBottom": 13,
+                  "paddingRight": 15,
+                  "paddingTop": 13,
+                }
+              }
+              virtual={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                disabled={false}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "alignSelf": "center",
+                    "color": "#000",
+                    "fontFamily": "System",
+                    "fontSize": 16,
+                  }
+                }
+                uppercase={false}
+                virtual={undefined}
+              >
+                Logout
               </Text>
             </View>
           </View>

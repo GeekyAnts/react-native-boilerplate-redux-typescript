@@ -9,9 +9,9 @@ import getTheme from "../theme/components";
 import variables from "../theme/variables/platform";
 export interface Props {}
 export interface State {
-	store: Object,
-	isLoading: boolean,
-	isReady: boolean,
+	store: Object;
+	isLoading: boolean;
+	isReady: boolean;
 }
 export default class Setup extends React.Component<Props, State> {
 	constructor() {

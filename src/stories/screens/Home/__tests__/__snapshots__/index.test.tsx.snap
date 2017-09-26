@@ -145,61 +145,7 @@ exports[`renders correctly 1`] = `
           }
         }
         virtual={undefined}
-      >
-        <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
-          accessible={true}
-          collapsable={undefined}
-          hitSlop={undefined}
-          isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          style={
-            Object {
-              "alignItems": "center",
-              "alignSelf": null,
-              "backgroundColor": "transparent",
-              "borderBottomWidth": null,
-              "borderColor": null,
-              "borderLeftWidth": null,
-              "borderRadius": 50,
-              "borderRightWidth": null,
-              "borderTopWidth": null,
-              "elevation": 0,
-              "flexDirection": "row",
-              "height": 45,
-              "justifyContent": "space-between",
-              "marginRight": -8,
-              "opacity": 1,
-              "paddingBottom": 6,
-              "paddingLeft": 15,
-              "paddingRight": 15,
-              "paddingTop": 6,
-              "shadowColor": null,
-              "shadowOffset": null,
-              "shadowOpacity": null,
-              "shadowRadius": null,
-            }
-          }
-          testID={undefined}
-          tvParallaxProperties={undefined}
-        >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            disabled={false}
-            ellipsizeMode="tail"
-          />
-        </View>
-      </View>
+      />
     </View>
   </View>
   <RCTScrollView
@@ -234,13 +180,19 @@ exports[`renders correctly 1`] = `
   >
     <View>
       <View
-        style={
-          Object {
-            "flex": 1,
-            "flexDirection": "row",
-            "marginTop": 18,
-          }
-        }
+        closeOnRowBeginSwipe={false}
+        closeOnRowPress={true}
+        closeOnScroll={true}
+        directionalDistanceChangeThreshold={2}
+        disableLeftSwipe={false}
+        disableRightSwipe={false}
+        leftOpenValue={0}
+        previewFirstRow={false}
+        recalculateHiddenLayout={false}
+        rightOpenValue={0}
+        style={Object {}}
+        swipeToOpenPercent={50}
+        virtual={undefined}
       />
     </View>
   </RCTScrollView>
