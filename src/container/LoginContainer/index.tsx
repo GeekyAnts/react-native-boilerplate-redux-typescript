@@ -26,7 +26,7 @@ class LoginForm extends React.Component<Props, State> {
 				<Icon active name={input.name === "email" ? "person" : "unlock"} />
 				<Input
 					ref={c => (this.textInput = c)}
-					placeholder={input.name === "email" ? "EMAIL" : "PASSWORD"}
+					placeholder={input.name === "email" ? "Email" : "Password"}
 					secureTextEntry={input.name === "password" ? true : false}
 					{...input}
 				/>
