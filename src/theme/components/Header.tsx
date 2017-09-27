@@ -219,6 +219,12 @@ export default (variables = variable) => {
 					backgroundColor: "transparent",
 				},
 			},
+			"NativeBase.Icon": {
+				color: variables.toolbarBtnColor,
+			},
+			"NativeBase.IconNB": {
+				color: variables.toolbarBtnColor,
+			},
 		},
 		"NativeBase.Right": {
 			"NativeBase.Button": {
