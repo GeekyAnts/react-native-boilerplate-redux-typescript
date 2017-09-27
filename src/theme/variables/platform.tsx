@@ -246,7 +246,7 @@ export default {
 	tabTextColor: "#222222",
 
 	// Text
-	textColor: platform === "ios" ? "#000" : "#FFF",
+	textColor: "#000",
 	inverseTextColor: "#fff",
 	noteFontSize: 14,
 

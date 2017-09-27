@@ -98,17 +98,20 @@ exports[`renders correctly 1`] = `
             disabled={false}
             ellipsizeMode="tail"
             style={
-              Object {
-                "color": "#000",
-                "fontFamily": "System",
-                "fontSize": 16,
-              }
+              Array [
+                Object {
+                  "color": "#000",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "#000",
+                },
+              ]
             }
             uppercase={false}
             virtual={undefined}
-          >
-            Build Something Amazing
-          </Text>
+          />
         </View>
       </View>
     </View>
