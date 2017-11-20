@@ -1,6 +1,6 @@
 {
   "name": "ReactNativeSeed",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "devDependencies": {
     "@types/jest": "^20.0.8",
