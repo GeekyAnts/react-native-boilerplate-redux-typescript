@@ -1,0 +1,1 @@
+{"version":3,"file":"View.js","sourceRoot":"","sources":["../../../src/theme/components/View.tsx"],"names":[],"mappings":"AAAA,OAAO,QAAQ,MAAM,yBAAyB,CAAC;AAE/C,eAAe,CAAC,SAAS,GAAG,QAAQ,EAAE,EAAE;IACvC,MAAM,SAAS,GAAG;QACjB,SAAS,EAAE;YACV,OAAO,EAAE,SAAS,CAAC,cAAc;SACjC;KACD,CAAC;IAEF,MAAM,CAAC,SAAS,CAAC;AAClB,CAAC,CAAC"}

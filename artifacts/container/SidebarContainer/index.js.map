@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../src/container/SidebarContainer/index.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,KAAK,MAAM,OAAO,CAAC;AAC/B,OAAO,OAAO,MAAM,+BAA+B,CAAC;AAKpD,MAAM,CAAC,OAAO,uBAAwB,SAAQ,KAAK,CAAC,SAAuB;IAC1E,MAAM;QACL,MAAM,CAAC,oBAAC,OAAO,IAAC,UAAU,EAAE,IAAI,CAAC,KAAK,CAAC,UAAU,GAAI,CAAC;IACvD,CAAC;CACD"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../src/container/BlankPageContainer/index.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,KAAK,MAAM,OAAO,CAAC;AAC/B,OAAO,SAAS,MAAM,iCAAiC,CAAC;AAKxD,MAAM,CAAC,OAAO,yBAA0B,SAAQ,KAAK,CAAC,SAAuB;IAC5E,MAAM;QACL,MAAM,CAAC,oBAAC,SAAS,IAAC,UAAU,EAAE,IAAI,CAAC,KAAK,CAAC,UAAU,GAAI,CAAC;IACzD,CAAC;CACD"}
