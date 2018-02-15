@@ -1,6 +1,6 @@
 {
   "expo": {
-    "sdkVersion": "24.0.0",
+    "sdkVersion": "25.0.0",
     "slug": "React-Native-Seed",
     "loading": {
       "hideExponentText": false,

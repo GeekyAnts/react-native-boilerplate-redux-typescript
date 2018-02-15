@@ -1,38 +1,35 @@
 {
   "name": "ReactNativeSeed",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "devDependencies": {
-    "@types/jest": "^20.0.8",
-    "@types/react": "^16.0.5",
-    "@types/react-native": "^0.47.7",
-    "@types/react-native-vector-icons": "^4.3.1",
-    "@types/react-navigation": "^1.0.19",
-    "babel-eslint": "8.1.0",
-    "babel-jest": "22.0.4",
-    "babel-preset-react-native": "^3.0.1",
+    "@types/jest": "22.1.2",
+    "@types/react": "16.0.37",
+    "@types/react-native": "0.52.9",
+    "@types/react-native-vector-icons": "4.4.3",
+    "@types/react-navigation": "1.0.32",
+    "babel-eslint": "8.2.1",
+    "babel-jest": "22.2.2",
+    "babel-preset-react-native": "4.0.0",
     "concurrently": "3.5.1",
     "eslint": "4.14.0",
     "husky": "0.14.3",
-    "jest-expo": "^24.0.0",
-    "react-native-scripts": "1.8.1",
+    "jest-expo": "^25.0.0",
+    "react-native-scripts": "1.11.1",
     "react-test-renderer": "16.2.0",
-    "ts-jest": "22.0.0",
+    "ts-jest": "22.0.4",
     "rimraf": "^2.6.2",
-    "tslint": "^5.8.0",
+    "tslint": "5.9.1",
     "typescript": "2.6.2"
   },
   "main": "node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
-    "start":
-      "npm run build && concurrently -r 'npm run watch' 'react-native-scripts start'",
+    "start": "npm run build && concurrently -r 'npm run watch' 'react-native-scripts start'",
     "eject": "react-native-scripts eject",
-    "test": "yarn jest && tslint src/**/*.ts && eslint .",
+    "test": "tslint src/**/*.ts && eslint .",
     "watch": "npm run build -- -w",
-    "ios":
-      "npm run build && concurrently -r 'npm run watch' 'react-native-scripts ios'",
-    "android":
-      "npm run build && concurrently -r 'npm run watch' 'react-native-scripts android'",
+    "ios": "npm run build && concurrently -r 'npm run watch' 'react-native-scripts ios'",
+    "android": "npm run build && concurrently -r 'npm run watch' 'react-native-scripts android'",
     "tsc": "tsc",
     "clean": "rimraf artifacts",
     "build": "npm run clean && npm run tsc --",
@@ -42,7 +39,11 @@
   },
   "jest": {
     "preset": "jest-expo",
-    "moduleFileExtensions": ["ts", "tsx", "js"],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
     "transform": {
       "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",
       "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
@@ -53,18 +54,18 @@
     ]
   },
   "dependencies": {
-    "expo": "^24.0.0",
-    "lodash": "4.17.4",
-    "native-base": "2.3.5",
+    "expo": "25.0.0",
+    "lodash": "4.17.5",
+    "native-base": "2.3.8",
     "react": "16.2.0",
-    "react-native": "0.51.0",
-    "react-navigation": "1.0.0-beta.21",
+    "react-native": "0.52.0",
+    "react-navigation": "1.0.0-beta.27",
     "react-redux": "5.0.6",
     "redux": "3.7.2",
-    "redux-form": "7.2.0",
-    "redux-persist": "5.4.0",
+    "redux-form": "7.2.3",
+    "redux-persist": "5.7.2",
     "redux-thunk": "2.2.0",
-    "remote-redux-devtools": "0.5.0",
-    "remote-redux-devtools-on-debugger": "^0.8.0"
+    "remote-redux-devtools": "0.5.12",
+    "remote-redux-devtools-on-debugger": "0.8.3"
   }
 }

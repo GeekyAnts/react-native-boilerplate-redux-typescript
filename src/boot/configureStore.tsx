@@ -4,7 +4,7 @@ import thunk from "redux-thunk";
 import { persistStore } from "redux-persist";
 import reducer from "../reducers";
 
-export default function configureStore(onCompletion: () => void): any {
+export default function configureStore(onCompletion:any): any {
   const enhancer = compose(
     applyMiddleware(thunk),
     devTools({
