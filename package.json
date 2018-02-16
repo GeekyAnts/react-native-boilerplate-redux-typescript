@@ -11,25 +11,23 @@
     "babel-eslint": "8.2.1",
     "babel-jest": "22.2.2",
     "babel-preset-react-native": "4.0.0",
+    "babel-preset-react-native-stage-0": "^1.0.1",
     "concurrently": "3.5.1",
     "eslint": "4.14.0",
     "husky": "0.14.3",
-    "jest-expo": "^25.0.0",
-    "react-native-scripts": "1.11.1",
+    "jest-react-native": "^18.0.0",
     "react-test-renderer": "16.2.0",
-    "ts-jest": "22.0.4",
     "rimraf": "^2.6.2",
+    "ts-jest": "22.0.4",
     "tslint": "5.9.1",
     "typescript": "2.6.2"
   },
-  "main": "node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
-    "start": "npm run build && concurrently -r 'npm run watch' 'react-native-scripts start'",
-    "eject": "react-native-scripts eject",
+    "start": "react-native start",
     "test": "tslint src/**/*.ts && eslint .",
     "watch": "npm run build -- -w",
-    "ios": "npm run build && concurrently -r 'npm run watch' 'react-native-scripts ios'",
-    "android": "npm run build && concurrently -r 'npm run watch' 'react-native-scripts android'",
+    "ios": "react-native run-ios",
+    "android": "react-native run-android",
     "tsc": "tsc",
     "clean": "rimraf artifacts",
     "build": "npm run clean && npm run tsc --",
@@ -38,7 +36,7 @@
     "precommit": "yarn test"
   },
   "jest": {
-    "preset": "jest-expo",
+    "preset": "react-native",
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -54,7 +52,6 @@
     ]
   },
   "dependencies": {
-    "expo": "25.0.0",
     "lodash": "4.17.5",
     "native-base": "2.3.8",
     "react": "16.2.0",
