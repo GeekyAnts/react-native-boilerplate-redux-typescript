@@ -17,7 +17,7 @@ const Drawer = DrawerNavigator(
 	{
 		drawerWidth: deviceWidth - 50,
 		drawerPosition: "left",
-		contentComponent: Sidebar,
+		contentComponent: (props: any) => <Sidebar {...props} />,
 	}
 );
 
