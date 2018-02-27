@@ -24,7 +24,7 @@
   },
   "scripts": {
     "start": "react-native start",
-    "test": "tslint src/**/*.ts && eslint .",
+    "test": "yarn jest && tslint src/**/*.ts && eslint .",
     "watch": "npm run build -- -w",
     "ios": "react-native run-ios",
     "android": "react-native run-android",
@@ -48,7 +48,7 @@
     },
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
     "transformIgnorePatterns": [
-      "node_modules/(?!(react-native|lottie-react-native|expo|react-native-maps|react-native-svg|react-native-branch|native-base-shoutem-theme|react-native-easy-grid|react-native-drawer|react-native-vector-icons|react-native-keyboard-aware-scroll-view|react-navigation|native-base|@expo|react-native-scrollable-tab-view)/)"
+      "node_modules/(?!(react-native|lottie-react-native|expo|react-native-maps|react-native-svg|react-native-branch|native-base-shoutem-theme|react-native-easy-grid|react-native-drawer|react-native-vector-icons|react-native-keyboard-aware-scroll-view|react-navigation|native-base|@expo|react-native-scrollable-tab-view|react-native-iphone-x-helper)/)"
     ]
   },
   "dependencies": {
