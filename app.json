@@ -1,12 +1,13 @@
 {
   "expo": {
-    "sdkVersion": "24.0.0",
+    "name": "React-Native-Seed",
     "slug": "React-Native-Seed",
-    "loading": {
-      "hideExponentText": false,
-      "icon": "./assets/loading.png"
-    },
+    "privacy": "public",
+    "sdkVersion": "31.0.0",
+    "platforms": ["ios", "android"],
+    "version": "1.2.0",
     "orientation": "portrait",
+    "icon": "./assets/loading.png",
     "primaryColor": "#cccccc",
     "packagerOpts": {
       "assetExts": ["ttf"]

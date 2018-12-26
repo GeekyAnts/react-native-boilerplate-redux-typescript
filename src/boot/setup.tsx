@@ -7,19 +7,18 @@ import configureStore from "./configureStore";
 import App from "../App";
 import getTheme from "../theme/components";
 import variables from "../theme/variables/platform";
-export interface Props {}
 export interface State {
-  store: Object;
+  store: object;
   isLoading: boolean;
   isReady: boolean;
 }
-export default class Setup extends React.Component<Props, State> {
+export default class Setup extends React.Component<{}, State> {
   constructor(props) {
     super(props);
     this.state = {
       isLoading: false,
       store: configureStore(() => this.setState({ isLoading: false })),
-      isReady: false
+      isReady: false,
     };
   }
   componentWillMount() {
@@ -29,7 +28,7 @@ export default class Setup extends React.Component<Props, State> {
     await Expo.Font.loadAsync({
       Roboto: require("native-base/Fonts/Roboto.ttf"),
       Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
-      Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
+      Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf"),
     });
 
     this.setState({ isReady: true });
