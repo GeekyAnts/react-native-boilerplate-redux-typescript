@@ -43,7 +43,11 @@
   },
   "jest": {
     "preset": "jest-expo",
-    "moduleFileExtensions": ["ts", "tsx", "js"],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
     "transform": {
       "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",
       "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
@@ -54,6 +58,7 @@
     ]
   },
   "dependencies": {
+    "@babel/runtime": "^7.3.1",
     "lodash": "4.17.4",
     "native-base": "2.3.5",
     "react": "16.2.0",
